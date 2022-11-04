@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ДЗ3_ПосадскийМ/1.0.0": {
+        "runtime": {
+          "ДЗ3_ПосадскийМ.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ДЗ3_ПосадскийМ/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
