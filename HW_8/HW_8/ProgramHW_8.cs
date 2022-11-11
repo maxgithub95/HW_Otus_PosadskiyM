@@ -39,6 +39,13 @@
                     GetAscendingList(startRoot.RightDaughter);
                 }
             }
+            static string GetEmployee(int salary, Node startRoot)
+            {
+                if (salary == startRoot.Salary) return startRoot.Name;
+                if ((salary < startRoot.Salary) && (startRoot.LeftDaughter != null)) return GetEmployee(salary, startRoot.LeftDaughter);
+                if ((salary > startRoot.Salary) && (startRoot.RightDaughter != null))return GetEmployee(salary, startRoot.RightDaughter);
+                return "Такой сотрудник не найден";
+            }
             Node root = null;
             while (true)
             {
@@ -63,7 +70,14 @@
                 }
             }
             if (root == null) Console.WriteLine("Tree is empty");
-            else GetAscendingList(root);
+            else
+            {
+                GetAscendingList(root);
+                Console.WriteLine("Enter salary to search for an employee:");
+                int DesiredSalary = Int32.Parse(Console.ReadLine());
+                Console.WriteLine(GetEmployee(DesiredSalary, root));
+            }
+
 
         }
     }
