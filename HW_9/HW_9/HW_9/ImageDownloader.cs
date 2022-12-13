@@ -14,6 +14,8 @@ namespace HW_9
         string fileName { get; set; }
 
         WebClient myWebClient;
+        public event Action ImageStarted;
+        public event Action ImageCompleted;
         public ImageDownloader(string _remoteUri, string _fileName)
         {   
             myWebClient = new WebClient();
@@ -25,7 +27,9 @@ namespace HW_9
         public void Download()
         {
             Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
+            ImageStarted?.Invoke();
             myWebClient.DownloadFile(remoteUri, fileName);
+            ImageCompleted?.Invoke();
             Console.WriteLine("Успешно скачал \"{0}\" из \"{1}\"", fileName, remoteUri);
         }
        
