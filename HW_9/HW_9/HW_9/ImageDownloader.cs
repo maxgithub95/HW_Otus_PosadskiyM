@@ -24,11 +24,11 @@ namespace HW_9
             
         }
 
-        public void Download()
+        public async Task Download()
         {
             Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
             ImageStarted?.Invoke();
-            myWebClient.DownloadFile(remoteUri, fileName);
+            await myWebClient.DownloadFileTaskAsync(remoteUri, fileName);
             ImageCompleted?.Invoke();
             Console.WriteLine("Успешно скачал \"{0}\" из \"{1}\"", fileName, remoteUri);
         }

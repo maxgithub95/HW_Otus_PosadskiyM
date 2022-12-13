@@ -12,9 +12,15 @@ namespace HW_9
             var imageDownloader = new ImageDownloader(picutreUri, Name);
             imageDownloader.ImageStarted += StartOfDownloading;
             imageDownloader.ImageCompleted += FinishOfDownloading;
-            imageDownloader.Download();
-            Console.WriteLine("Нажмите любую клавишу для выхода");
-            Console.ReadKey();
+            var TaskDownload = imageDownloader.Download();
+            Console.WriteLine("Нажмите клавишу A для выхода или любую другую клавишу для проверки статуса скачивания");
+            var key = Console.ReadKey(true);
+            while (key.Key != ConsoleKey.A)
+            {
+                if (TaskDownload.IsCompleted) Console.WriteLine("Картинка загружена");
+                else Console.WriteLine("Картинка не загружена");
+                key = Console.ReadKey(true);
+            }
         }
 
         private static void FinishOfDownloading()
