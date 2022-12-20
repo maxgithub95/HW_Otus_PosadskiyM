@@ -1,47 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HW_11
+﻿namespace HW_11
 {
     public class OtusDictionary
     {
         public Elementes[] element = new Elementes[32];
         public void Add(int key, string value)
         {
-            if (value == null) throw new ArgumentNullException("value");
-            int hash = key % 32;
-            if (element[hash] == null) { element[hash]= new Elementes(key, value); }
-            else { throw new ElementFilledException("место занято"); }
+            if (value == null) throw new ArgumentNullException();
+            int hash = key % element.Length;
+            if (element[hash] == null) { element[hash] = new Elementes(key, value); }
+            else
+            {
+                SolutionCollision();
+                Add(key, value);
+            }
 
         }
-        public string Get(int key)
+
+        private void SolutionCollision()
         {
-            return "0";
+            Elementes[] elementsCopy = element;
+            var k = element.Length * 2;
+            this.element = new Elementes[k];
+            foreach (var item in elementsCopy)
+            {
+                if (item != null)
+                Add(item.Key, item.Value);
+            }
+        }
+
+        public string? Get(int key)
+        {
+            int hash = key % element.Length;
+            if (element[hash] == null) { return null; }
+            return element[hash].Value;
         }
     }
 
     [Serializable]
     internal class ElementFilledException : Exception
     {
-        public ElementFilledException()
-        {
-        }
+
 
         public ElementFilledException(string? message) : base(message)
         {
         }
 
-        public ElementFilledException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
 
-        protected ElementFilledException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 
     public class Elementes
