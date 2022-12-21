@@ -1,8 +1,20 @@
 ﻿namespace HW_11
 {
+    public class ElementFilledException : Exception
+    {
+        public ElementFilledException(string? message) : base(message)
+        {
+        }
+
+    }
     public class OtusDictionary
     {
         public Elementes[] element = new Elementes[32];
+        public string? this[int key]
+        {
+            get => Get(key);
+            set => Add(key, value);
+        }
         public void Add(int key, string value)
         {
             if (value == null) throw new ArgumentNullException();
@@ -13,7 +25,6 @@
                 SolutionCollision();
                 Add(key, value);
             }
-
         }
 
         private void SolutionCollision()
@@ -24,7 +35,7 @@
             foreach (var item in elementsCopy)
             {
                 if (item != null)
-                Add(item.Key, item.Value);
+                    Add(item.Key, item.Value);
             }
         }
 
@@ -36,17 +47,7 @@
         }
     }
 
-    [Serializable]
-    internal class ElementFilledException : Exception
-    {
 
-
-        public ElementFilledException(string? message) : base(message)
-        {
-        }
-
-
-    }
 
     public class Elementes
     {
