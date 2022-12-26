@@ -4,15 +4,15 @@
     {
         static void Main(string[] args)
         {
-            var MyShop = new Shop();
+            var MyShop = new Shop("MyShop");
             var Customer1 = new Customer("Sylvester Stallone");
             Customer1.Subscribe(MyShop);
             ConsoleKeyInfo key;
-            Console.WriteLine("Выберите действие:\nA - Добавить товар\nD - Удалить товар\nX - Завершить работу программы");
             do
             {
-                key= Console.ReadKey(true);
-                switch(key.Key)
+                Console.WriteLine("Выберите действие:\nA - Добавить товар\nD - Удалить товар\nX - Завершить работу программы");
+                key = Console.ReadKey(true);
+                switch (key.Key)
                 {
                     case ConsoleKey.A:
                         MyShop.Add($"Товар от {DateTime.Now}");
@@ -20,7 +20,7 @@
                     case ConsoleKey.D:
                         Console.WriteLine("Введите id товара для удаления из каталога");
                         MyShop.ShowCatalog();
-                        bool sucsess = Int32.TryParse(Console.ReadLine(),out int idToRemove);
+                        bool sucsess = Int32.TryParse(Console.ReadLine(), out int idToRemove);
                         while (!sucsess)
                         {
                             Console.WriteLine("Вы ввели неверный фотмат id, повторите ввод:");
@@ -30,12 +30,12 @@
                         break;
                     case ConsoleKey.X:
                         break;
-                    default: 
+                    default:
                         Console.WriteLine("Неверная команда!");
                         break;
                 }
             }
-            while (key.Key!=ConsoleKey.X);
+            while (key.Key != ConsoleKey.X);
         }
     }
 }
