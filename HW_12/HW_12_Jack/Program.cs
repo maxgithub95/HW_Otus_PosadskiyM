@@ -6,8 +6,10 @@ namespace HW_12_Jack
     {
         static void Main(string[] args)
         {
-           
-            ImmutableList<string> Empty = ImmutableList.Create<string>();
+
+            ImmutableList<string> Jack = ImmutableList.Create<string>();
+            int StartCount = Jack.Count();
+            var StartJack = Jack;
             Part1 MyPart1 = new Part1();
             Part2 MyPart2 = new Part2();
             Part3 MyPart3 = new Part3();
@@ -17,21 +19,17 @@ namespace HW_12_Jack
             Part7 MyPart7 = new Part7();
             Part8 MyPart8 = new Part8();
             Part9 MyPart9 = new Part9();
-            MyPart1.AddPart(Empty);
-            MyPart2.AddPart(MyPart1.Poem);
-            MyPart3.AddPart(MyPart2.Poem);
-            MyPart4.AddPart(MyPart3.Poem);
-            MyPart5.AddPart(MyPart4.Poem);
-            MyPart6.AddPart(MyPart5.Poem);
-            MyPart7.AddPart(MyPart6.Poem);
-            MyPart8.AddPart(MyPart7.Poem);
-            MyPart9.AddPart(MyPart8.Poem);
-            Console.WriteLine(string.Join("\n", MyPart9.Poem));
-
+            var FinalPoem = MyPart9.AddPart(MyPart8.AddPart(MyPart7.AddPart(MyPart6.AddPart(MyPart5.AddPart(MyPart4.AddPart(MyPart3.AddPart(MyPart2.AddPart(MyPart1.AddPart(Jack)))))))));     
+            Console.WriteLine(string.Join("\n", FinalPoem));
+            int FinalCount = Jack.Count();
+            var FinalJack = Jack;
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write($"Количество элементов в первоначальной коллекции: {Empty.Count}");
+            Console.WriteLine($"Количество элементов в первоначальной коллекции до выполнения кода: {StartCount}");
+            Console.WriteLine($"Количество элементов в первоначальной коллекции после выполнения кода: {FinalCount}");
+            if (StartJack.SequenceEqual(FinalJack)) Console.WriteLine("Коллекция не изменилась!");
+            else Console.WriteLine("Увы, колекция изменилась=(");
             Console.ResetColor();
         }
     }
