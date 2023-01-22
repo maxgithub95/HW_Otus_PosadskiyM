@@ -33,6 +33,14 @@
             Console.WriteLine("Шестой запрос: Общее количество товаров во всех заказах!");
             var CountProducts = DapperMethods.GetCountItemsInOrders();
             Console.WriteLine($"Общее количество товаров - {CountProducts}");
+            Console.WriteLine();            
+            var Age = 30;
+            var ID = 1;
+            Console.WriteLine($"Join запрос из ДЗ_14: возвращает список всех пользователей старше {Age} лет, у которых есть заказ на продукт с ID={ID}!");
+            var Result = DapperMethods.GetResultHW14(Age, ID);
+            Console.WriteLine($"CustomerID: \t  Full Name\t  ProductID - ProductPrice; ProductQuantity");
+            foreach (var result in Result)
+            Console.WriteLine($"{result.CustomerID}: \t\t  {result.FirstName} {result.LastName}\t  {result.ProductID} - {result.ProductPrice}: {result.ProductQuantity} шт.");
             Console.WriteLine();
         }
     }
